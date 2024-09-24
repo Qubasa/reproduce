@@ -68,7 +68,8 @@ def test_gpg_gen(
         Name-Email: test@local
         Expire-Date: 0
         %no-protection
-    """)
+    """
+    )
 
     cmd = ["ssh-keygen", "-t", "ed25519", "-f", "testkey", "-N", ""]
     subprocess.run(
@@ -76,7 +77,7 @@ def test_gpg_gen(
         check=True,
     )
     sha256 = checksum(Path("testkey"))
-    #assert sha256 == "2da3b2e850419580535cf1fa992d50917f631a4841b2f4a2a97f461e4efc95c9"
+    # assert sha256 == "2da3b2e850419580535cf1fa992d50917f631a4841b2f4a2a97f461e4efc95c9"
     return
     cmd = ["gpg", "--batch", "--gen-key", str(gpg_key_spec)]
     print(shlex.join(cmd))
@@ -96,9 +97,9 @@ def test_gpg_gen(
         key_checksum = key.read_text()
         lines = key_checksum.splitlines()
         date = lines[0].split(" ")[1]
-       # assert date == "20240611T110408" or date == "20240611T110359"
+        # assert date == "20240611T110408" or date == "20240611T110359"
         print(lines[0])
         print(lines[1:])
         sha256 = checksum(key)
         print(f"sha256 checksum: {sha256}")
-        #assert sha256 == "88006c5e845658b542370a323cbd2eee3b409f38aaf3fdf06e1b491e0736df35" or sha256 == "62fc6c9d1764838e55720817a196290b2b5b7143f6a8799edcd90727de5c75b1"
+        # assert sha256 == "88006c5e845658b542370a323cbd2eee3b409f38aaf3fdf06e1b491e0736df35" or sha256 == "62fc6c9d1764838e55720817a196290b2b5b7143f6a8799edcd90727de5c75b1"

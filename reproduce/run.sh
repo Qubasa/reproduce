@@ -3,9 +3,9 @@ set -epu pipefail
 
 # check if dir build not exists
 if [ ! -d "build" ]; then
-    mkdir build
-    cmake -B build -S . -DCMAKE_INSTALL_PREFIX="" -DCMAKE_BUILD_TYPE=Debug
-    ln -snf build/compile_commands.json .
+  mkdir build
+  cmake -B build -S . -DCMAKE_INSTALL_PREFIX="" -DCMAKE_BUILD_TYPE=Debug
+  ln -snf build/compile_commands.json .
 fi
 
 make -C build

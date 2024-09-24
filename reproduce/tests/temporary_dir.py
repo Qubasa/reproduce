@@ -23,12 +23,14 @@ def temporary_home(monkeypatch: pytest.MonkeyPatch) -> Iterator[Path]:
         gpgdir = runtime_dir / "gpgagent"
         gpgdir.mkdir()
         gpgdir.chmod(0o700)
-        monkeypatch.setenv("GPG_AGENT_INFO", gpgdir)
+        monkeypatch.setenv("GPG_AGENT_INFO", str(gpgdir))
 
         # Iterate over all environment variables
         for key, value in os.environ.items():
-            if value.startswith(xdg_runtime_dir):
-                monkeypatch.setenv(key, value.replace(xdg_runtime_dir, str(runtime_dir)))
+            if value.startswith(str(xdg_runtime_dir)):
+                monkeypatch.setenv(
+                    key, value.replace(str(xdg_runtime_dir), str(runtime_dir))
+                )
 
         monkeypatch.setenv("XDG_RUNTIME_DIR", str(runtime_dir))
         monkeypatch.chdir(str(dirpath))

@@ -13,7 +13,7 @@
   outputs =
     inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } (
-      { lib, self, ... }:
+      { ... }:
       {
         imports = [
           ./treefmt.nix

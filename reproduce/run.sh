@@ -13,5 +13,5 @@ DESTDIR="." make install -C build
 #ctest --test-dir build
 
 export ASAN_OPTIONS=detect_leaks=0
-#gdb -q -ex "set confirm off" -ex "set pagination off" -ex "file ./build/bin/repro-hook" -ex "run './build/bin/printrandom'" ./build/bin/repro-hook
-./build/bin/repro-hook ./build/bin/printrandom
+#gdb -q -ex "set confirm off" -ex "set pagination off" -ex "file ./build/bin/reproduce" -ex "run './build/bin/printrandom'" ./build/bin/reproduce
+./build/bin/reproduce ./build/bin/printrandom

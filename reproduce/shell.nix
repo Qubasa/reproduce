@@ -1,6 +1,6 @@
 {
   mkShell,
-  repro-hook,
+  reproduce,
   libllvm,
   clang,
   ipdb,
@@ -10,8 +10,8 @@ let
   removePkg = pkg: pkg != glibc.static;
 in
 mkShell {
-  nativeBuildInputs = (builtins.filter removePkg repro-hook.nativeBuildInputs);
-  buildInputs = repro-hook.buildInputs ++ [
+  nativeBuildInputs = (builtins.filter removePkg reproduce.nativeBuildInputs);
+  buildInputs = reproduce.buildInputs ++ [
     clang
     libllvm # forgot
     ipdb # python debugger

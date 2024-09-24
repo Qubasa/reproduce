@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(repro-hook)
+project(reproduce)
 
 # Set the C and C++ compilers to clang
 set(CMAKE_C_COMPILER clang)
@@ -76,7 +76,7 @@ endif()
 
 # Add the executables
 add_executable(printrandom src/printrandom.c)
-add_executable(repro-hook
+add_executable(reproduce
     src/main.c
     src/putils.c
     src/vdso.c
@@ -92,23 +92,23 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     message(WARNING "Debug build. Adding sanitizer flags.")
     # Link the sanitizer libraries
     target_link_libraries(printrandom ${PERF_FLAGS}  ${SANITIZE_FLAGS} ${BETTER_STACKTRACE}  ${ADDITIONAL_FLAGS} pthread)
-    target_link_libraries(repro-hook ${PERF_FLAGS}  ${SANITIZE_FLAGS} ${BETTER_STACKTRACE}  ${ADDITIONAL_FLAGS})
+    target_link_libraries(reproduce ${PERF_FLAGS}  ${SANITIZE_FLAGS} ${BETTER_STACKTRACE}  ${ADDITIONAL_FLAGS})
 else()
     target_link_libraries(printrandom ${PERF_FLAGS} ${ADDITIONAL_FLAGS})
-    target_link_libraries(repro-hook ${PERF_FLAGS} ${ADDITIONAL_FLAGS})
+    target_link_libraries(reproduce ${PERF_FLAGS} ${ADDITIONAL_FLAGS})
 endif()
 
 
 # Installation targets
-install(TARGETS printrandom repro-hook RUNTIME DESTINATION bin)
+install(TARGETS printrandom reproduce RUNTIME DESTINATION bin)
 
 
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
     # Add a custom command to strip the binary after build
     add_custom_command(
-        TARGET repro-hook
+        TARGET reproduce
         POST_BUILD
-        COMMAND ${CMAKE_STRIP} --strip-all $<TARGET_FILE:repro-hook>
+        COMMAND ${CMAKE_STRIP} --strip-all $<TARGET_FILE:reproduce>
         COMMENT "Stripping the binary"
     )
 endif()

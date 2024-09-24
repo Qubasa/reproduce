@@ -16,7 +16,7 @@ let
   ];
 in
 llvmPackages.stdenv.mkDerivation {
-  name = "repro-hook";
+  name = "reproduce";
 
   src = ./.;
 
@@ -33,7 +33,7 @@ llvmPackages.stdenv.mkDerivation {
   cmakeFlags = [ "-DCMAKE_BUILD_TYPE=Release" ];
 
   checkPhase = ''
-    ./repro-hook pytest -s
+    ./reproduce pytest -s
   '';
 
   doCheck = false; # Ensure that the checkPhase is run

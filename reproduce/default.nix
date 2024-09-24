@@ -1,6 +1,6 @@
 {
-  llvmPackages,
   cmake,
+  clangStdenv,
   lld,
   pytest,
   glibc,
@@ -15,7 +15,7 @@ let
     pytest-xdist
   ];
 in
-llvmPackages.stdenv.mkDerivation {
+clangStdenv.mkDerivation {
   name = "reproduce";
 
   src = ./.;

@@ -10,8 +10,7 @@ fi
 
 make -C build
 DESTDIR="." make install -C build
-#ctest --test-dir build
 
 export ASAN_OPTIONS=detect_leaks=0
 #gdb -q -ex "set confirm off" -ex "set pagination off" -ex "file ./build/bin/reproduce" -ex "run './build/bin/printrandom'" ./build/bin/reproduce
-./build/bin/reproduce ./build/bin/printrandom
+./build/reproduce ./build/printrandom

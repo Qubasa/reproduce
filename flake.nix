@@ -1,5 +1,5 @@
 {
-  description = "distributed data daemon for exchanging data (like hostnames) in distributed networks";
+  description = "Utility that makes builds reproducible by hijacking syscalls";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
